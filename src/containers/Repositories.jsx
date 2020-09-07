@@ -1,8 +1,24 @@
-import React,{Component} from 'react'
+import React, { useState,useEffect } from 'react'
 import {ListRepositories} from '../api/github'
 import Item from '../component/Item';
 
-class Repositories extends Component{
+function Repositories () {
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        ListRepositories()
+            .then(data => {
+                setData(data);
+          })
+    },[])
+
+    return (
+        <ul>
+            {data.map(item => <Item key={item.id} {...item}/>)}
+        </ul>
+    )   
+}
+
+/*class Repositories extends Component{
   constructor(props){
     super(props);
       this.state={
@@ -25,5 +41,5 @@ class Repositories extends Component{
       </div>
     );
   }
-}
-export default Repositories;
+}*/
+export default Repositories

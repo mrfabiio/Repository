@@ -1,14 +1,25 @@
-import React,{Component} from 'react'
+import React from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 import Repositories from './containers/Repositories'
-class App extends Component{
-  render(){
-    return (
+import Repository from "./containers/Repository";
+
+function App(){
+  return(
+    <Router>
       <div className="App">
-        <ul>
-          <Repositories/>
-        </ul>
+        <Switch>
+          <Route path="/repos/:owner/:name" component={Repository}/>
+          <Route path="/" component={Repositories}/>
+        </Switch>
       </div>
-    );
-  }
+    </Router>
+  )
 }
-export default App;
+export default App
+
+
+
